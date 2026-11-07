@@ -1,0 +1,2 @@
+07-Nov-2026 21:02:09 PM|ERROR|__main__|Cannot read directory ./wrong_folder: [WinError 3] The system cannot find the path specified: 'wrong_folder'
+07-Nov-2026 21:26:39 PM|ERROR|__main__|Error reading bad.gz: Not a gzipped file (b'\xff\xfe')
