@@ -1,7 +1,10 @@
+import os
 import requests
+
 URL_IPINFO = 'https://ipinfo.io'
+
 def get_location(ip):
-    response=requests.get(URL_IPINFO+'/'+ip+'/json', params={'token': '6df056949e2139'})
+    response=requests.get(URL_IPINFO+'/'+ip+'/json', params={'token': os.environ.get('IPINFO_TOKEN')})
     print(response.status_code, response.text) 
     if response.status_code==200:
         return response.json()
