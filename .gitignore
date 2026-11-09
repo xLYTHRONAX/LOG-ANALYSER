@@ -7,3 +7,4 @@ dashboard.html
 .env
 .vscode/
 *.log
+test.py

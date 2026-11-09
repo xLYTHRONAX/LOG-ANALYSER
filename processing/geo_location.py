@@ -20,7 +20,7 @@ URL_IPINFO = 'https://ipinfo.io'
 
 def get_location(ip):
     try:
-        response=requests.get(URL_IPINFO+'/'+ip+'/json', params={'token': os.environ.get('IPINFO_TOKEN')})
+        response=requests.get(URL_IPINFO+'/'+ip+'/json', params={'token': os.environ.get('IPINFO_TOKEN')}, timeout=5)
     except Exception as e:
         logger.error('Request failed for %s: %s', ip, e)
         return None  
@@ -32,9 +32,12 @@ def get_location(ip):
 cache = {}
 
 def get_country(ip):
-    if ip not in cache:
-        info=get_location(ip)
-        cache[ip]=info.get('country', 'Unknown') if info else 'Unknown'
+    if ip in cache:
+        return cache[ip]
+    info = get_location(ip)
+    if info is None:          
+        return 'Unknown'     
+    cache[ip] = info.get('country', 'Unknown')
     return cache[ip]
 
 if __name__=='__main__':
